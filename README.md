@@ -9,8 +9,9 @@
 - jsonwebtoken
 - bcrypt
 - morgan
+- jsonwebtoken
 
 ## local installation
 
 - mongodb server => for store data
-- robo 3t stdio  => visualization of stored data
+- robo 3t stdio => visualization of stored data
