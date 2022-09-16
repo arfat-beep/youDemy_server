@@ -10,6 +10,8 @@
 - bcrypt
 - morgan
 - jsonwebtoken
+- csurf (Cross Site Request forgery) => An extra security layer for transaction
+- cookie-parser
 
 ## local installation
 
