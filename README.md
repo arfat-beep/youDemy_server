@@ -13,6 +13,7 @@
 - csurf (Cross Site Request forgery) => An extra security layer for transaction
 - cookie-parser
 - express-jwt
+- aws-sdk ( provides AWS services)
 
 ## local installation
 
