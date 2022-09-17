@@ -74,3 +74,13 @@ export const logout = (req, res) => {
     console.log("error from logout catch : ", err);
   }
 };
+
+export const currentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password").exec();
+    console.log("Current user ", user);
+    return res.json(user);
+  } catch (err) {
+    console.log("error from currentUser catch : ", err);
+  }
+};
