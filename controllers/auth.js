@@ -140,7 +140,8 @@ export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
 
-    const shortCode = nanoid(7).toUpperCase();
+    const shortCode = await nanoid(7).toUpperCase();
+    console.log(shortCode);
     const user = await User.findOneAndUpdate(
       { email },
       {

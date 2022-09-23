@@ -15,6 +15,8 @@
 - express-jwt
 - aws-sdk ( provides AWS services)
 - nanoid (A tiny, secure, URL-friendly, unique string ID generator for JavaScript.)
+- stripe (This is for online gateway)
+- query-strin (A query string is a part of a URL that assigns values to specified parameters.)
 
 ## local installation
 
