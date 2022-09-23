@@ -60,3 +60,16 @@ export const getAccountStatus = async (req, res) => {
     console.log("Errro from getAccountStatus =>", err);
   }
 };
+
+export const currentInstructor = async (req, res) => {
+  try {
+    let user = await User.findById(req.auth._id).select("-password").exec();
+    if (!user.role.includes("Instructor")) {
+      return res.sendStatus(403);
+    } else {
+      res.json({ ok: true });
+    }
+  } catch (err) {
+    console.log("error from currentInstructor =>", err);
+  }
+};
