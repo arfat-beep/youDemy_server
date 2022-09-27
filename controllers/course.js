@@ -38,10 +38,34 @@ export const uploadImage = async (req, res) => {
         console.log("Error from server/controller/course upload to s3 =>", err);
         return res.sendStatus(400);
       }
-      console.log(data);
+      // console.log(data);
       res.send(data);
     });
   } catch (e) {
     console.log("Error from uploadImage from controllers/course => : ", e);
+  }
+};
+
+export const removeImage = async (req, res) => {
+  try {
+    const { image } = req.body;
+    // console.log(image);
+
+    // image params
+    const params = {
+      Bucket: image.Bucket,
+      Key: image.Key,
+    };
+
+    // delete from s3
+    S3.deleteObject(params, (err, data) => {
+      if (err) {
+        console.log("Error from S3.deleteObject =>", err);
+        res.sendStatus(400);
+      }
+      res.send({ ok: true });
+    });
+  } catch (e) {
+    console.log("Error from removeImage catch =>", e);
   }
 };
