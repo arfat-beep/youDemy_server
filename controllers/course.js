@@ -1,5 +1,7 @@
 import AWS from "aws-sdk";
 const nanoid = require("nanoid");
+import Course from "../models/course";
+import slugify from "slugify";
 
 const awsConfig = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -9,6 +11,7 @@ const awsConfig = {
 };
 const S3 = new AWS.S3(awsConfig);
 export const uploadImage = async (req, res) => {
+  
   // console.log(req.body);
   try {
     const { image } = req.body;
@@ -67,5 +70,29 @@ export const removeImage = async (req, res) => {
     });
   } catch (e) {
     console.log("Error from removeImage catch =>", e);
+  }
+};
+
+export const create = async (req, res) => {
+  // console.log("create course");
+  console.log(req.body);
+  try {
+    const alreadyExist = await Course.findOne({
+      slug: slugify(req.body.name.toLowerCase()),
+    });
+
+    if (alreadyExist) return res.status(400).send("Title is taken");
+
+    const course = await new Course({
+      slug: slugify(req.body.name),
+      instructor: req.auth._id,
+      ...req.body,
+    }).save();
+    res.json(course);
+  } catch (e) {
+    console.log(
+      "Error from server/controler/course create function's catch =>",
+      e
+    );
   }
 };
